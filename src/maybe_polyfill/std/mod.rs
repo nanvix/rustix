@@ -23,6 +23,8 @@ pub mod os {
 
         #[cfg(target_os = "wasi")]
         pub use std::os::fd::{AsFd, AsRawFd, BorrowedFd, FromRawFd, IntoRawFd, OwnedFd, RawFd};
+        #[cfg(target_os = "nanvix")]
+        pub use std::os::fd::{AsFd, AsRawFd, BorrowedFd, FromRawFd, IntoRawFd, OwnedFd, RawFd};
         #[cfg(unix)]
         pub use std::os::unix::io::{
             AsFd, AsRawFd, BorrowedFd, FromRawFd, IntoRawFd, OwnedFd, RawFd,

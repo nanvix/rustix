@@ -346,7 +346,8 @@ type _RawOpcode = c::c_ulong;
     target_os = "fuchsia",
     target_os = "emscripten",
     target_os = "wasi",
-    target_os = "nto"
+    target_os = "nto",
+    target_os = "nanvix",
 ))]
 type _RawOpcode = c::c_int;
 

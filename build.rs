@@ -91,7 +91,7 @@ fn main() {
     // install the toolchain for it.
     let libc = feature_use_libc
         || cfg_use_libc
-        || os != "linux"
+        || (os != "linux" && os != "nanvix")
         || !inline_asm_name_present
         || is_unsupported_abi
         || miri
@@ -101,8 +101,10 @@ fn main() {
         // Use the libc backend.
         use_feature("libc");
     } else {
-        // Use the linux_raw backend.
-        use_feature("linux_raw");
+        if os != "nanvix" {
+            // Use the linux_raw backend.
+            use_feature("linux_raw");
+        }
         if rustix_use_experimental_asm {
             use_feature("asm_experimental_arch");
         }

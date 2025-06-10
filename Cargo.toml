@@ -278,3 +278,6 @@ check-cfg = [
     'cfg(wasi_ext)',
     'cfg(target_arch, values("xtensa"))',
 ]
+
+[patch.crates-io]
+errno = { git = "https://github.com/nanvix/rust-errno", branch = "nanvix/v0.3.12" }

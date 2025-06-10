@@ -117,7 +117,7 @@
 #![cfg_attr(core_c_str, feature(core_c_str))]
 #![cfg_attr(all(feature = "alloc", alloc_c_string), feature(alloc_c_string))]
 #![cfg_attr(all(feature = "alloc", alloc_ffi), feature(alloc_ffi))]
-#![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(all(not(feature = "std"), not(target_os = "nanvix")), no_std)]
 #![cfg_attr(feature = "rustc-dep-of-std", feature(ip))]
 #![cfg_attr(feature = "rustc-dep-of-std", allow(internal_features))]
 #![cfg_attr(
@@ -137,6 +137,7 @@
     any(target_os = "redox", target_os = "wasi", not(feature = "all-apis")),
     allow(unused_imports)
 )]
+#![cfg_attr(target_os = "nanvix", feature(rustc_private))]
 
 #[cfg(all(feature = "rustc-dep-of-std", feature = "alloc"))]
 extern crate rustc_std_workspace_alloc as alloc;
@@ -187,6 +188,7 @@ mod weak;
 #[cfg_attr(libc, path = "backend/libc/mod.rs")]
 #[cfg_attr(linux_raw, path = "backend/linux_raw/mod.rs")]
 #[cfg_attr(wasi, path = "backend/wasi/mod.rs")]
+#[cfg_attr(target_os = "nanvix", path = "backend/nanvix/mod.rs")]
 mod backend;
 
 /// Export the `*Fd` types and traits that are used in rustix's public API.
