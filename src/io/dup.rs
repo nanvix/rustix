@@ -4,7 +4,7 @@ use crate::fd::OwnedFd;
 use crate::{backend, io};
 use backend::fd::AsFd;
 
-#[cfg(not(target_os = "wasi"))]
+#[cfg(all(not(target_os = "wasi"), not(target_os = "nanvix")))]
 pub use backend::io::types::DupFlags;
 
 /// `dup(fd)`—Creates a new `OwnedFd` instance that shares the same
@@ -39,7 +39,7 @@ pub use backend::io::types::DupFlags;
 /// [DragonFly BSD]: https://man.dragonflybsd.org/?command=dup&section=2
 /// [illumos]: https://illumos.org/man/2/dup
 /// [glibc]: https://sourceware.org/glibc/manual/latest/html_node/Duplicating-Descriptors.html
-#[cfg(not(target_os = "wasi"))]
+#[cfg(all(not(target_os = "wasi"), not(target_os = "nanvix")))]
 #[inline]
 pub fn dup<Fd: AsFd>(fd: Fd) -> io::Result<OwnedFd> {
     backend::io::syscalls::dup(fd.as_fd())
@@ -84,7 +84,7 @@ pub fn dup<Fd: AsFd>(fd: Fd) -> io::Result<OwnedFd> {
 /// [`stdio::dup2_stdin`]: crate::stdio::dup2_stdin
 /// [`stdio::dup2_stdout`]: crate::stdio::dup2_stdout
 /// [`stdio::dup2_stderr`]: crate::stdio::dup2_stderr
-#[cfg(not(target_os = "wasi"))]
+#[cfg(all(not(target_os = "wasi"), not(target_os = "nanvix")))]
 #[inline]
 pub fn dup2<Fd: AsFd>(fd: Fd, new: &mut OwnedFd) -> io::Result<()> {
     backend::io::syscalls::dup2(fd.as_fd(), new)
@@ -117,7 +117,8 @@ pub fn dup2<Fd: AsFd>(fd: Fd, new: &mut OwnedFd) -> io::Result<()> {
     target_os = "horizon",
     target_os = "nto",
     target_os = "vita",
-    target_os = "wasi"
+    target_os = "wasi",
+    target_os = "nanvix",
 )))]
 #[inline]
 pub fn dup3<Fd: AsFd>(fd: Fd, new: &mut OwnedFd, flags: DupFlags) -> io::Result<()> {

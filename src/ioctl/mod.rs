@@ -333,6 +333,7 @@ type _Opcode = c::c_ulong;
     target_os = "emscripten",
     target_os = "nto",
     target_os = "wasi",
+    target_os = "nanvix",
 ))]
 type _Opcode = c::c_int;
 
