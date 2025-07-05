@@ -186,11 +186,21 @@ pub(crate) mod bitcast;
 #[macro_use]
 mod weak;
 
-// Pick the backend implementation to use.
-#[cfg_attr(libc, path = "backend/libc/mod.rs")]
-#[cfg_attr(linux_raw, path = "backend/linux_raw/mod.rs")]
-#[cfg_attr(wasi, path = "backend/wasi/mod.rs")]
+// Force libc backend for Nanvix
+#[cfg(target_os = "nanvix")]
+#[path = "backend/libc/mod.rs"]
 mod backend;
+
+// Pick the backend implementation to use.
+#[cfg(not(target_os = "nanvix"))]
+mod backend {
+    #[cfg_attr(libc, path = "../backend/libc/mod.rs")]
+    #[cfg_attr(linux_raw, path = "../backend/linux_raw/mod.rs")]
+    #[cfg_attr(wasi, path = "../backend/wasi/mod.rs")]
+    mod backend_impl;
+    
+    pub use backend_impl::*;
+}
 
 /// Export the `*Fd` types and traits that are used in rustix's public API.
 ///
