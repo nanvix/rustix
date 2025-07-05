@@ -12,7 +12,7 @@ use crate::fd::{AsFd, BorrowedFd, OwnedFd, RawFd};
     target_os = "vita",
     target_os = "wasi"
 )))]
-use crate::io::DupFlags;
+use crate::backend::io::types::DupFlags;
 #[cfg(linux_kernel)]
 use crate::io::ReadWriteFlags;
 use crate::io::{self, FdFlags};
