@@ -1,3 +1,4 @@
+#![feature(rustc_private)]
 //! `rustix` provides efficient memory-safe and [I/O-safe] wrappers to
 //! POSIX-like, Unix-like, Linux, and Winsock syscall-like APIs, with
 //! configurable backends.

@@ -288,6 +288,9 @@ pub type IoctlOutput = c::c_int;
 /// The type used by the `ioctl` to signify the command.
 pub type Opcode = _Opcode;
 
+#[cfg(target_os = "nanvix")]
+use libc::_Opcode;
+
 // Under raw Linux, this is an `unsigned int`.
 #[cfg(linux_raw)]
 type _Opcode = c::c_uint;

@@ -271,3 +271,7 @@ check-cfg = [
     'cfg(target_arch, values("xtensa"))',
     'cfg(target_os, values("cygwin"))',
 ]
+
+[patch.crates-io]
+errno = { git = "https://github.com/nanvix/rust-errno", branch = "nanvix/v0.3.13" }
+libc = { git = "https://github.com/nanvix/libc", branch = "danbugs/nanvix/v0.2.174-dev" }
