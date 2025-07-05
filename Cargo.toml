@@ -115,7 +115,7 @@ targets = [
 # It turns out to be bizarrely awkward to obtain the aux values reliably and
 # efficiently on Linux from anywhere other than libc. We can do it, but most
 # users are better served by just using libc for this.
-default = ["std", "use-libc-auxv"]
+default = ["std", "use-libc", "use-libc-auxv"]
 
 # This enables use of std. Disabling this enables `#![no_std]`, and requires
 # Rust 1.64 or newer.
